@@ -22,7 +22,7 @@ class FirstFragment : Fragment() {
 
 
     lateinit var fragmentFirstBinding: FragmentFirstBinding
-    // TODO 여기부터 해야함
+    // TODO 여기부터
     lateinit var webView: WebView
 
     override fun onCreateView(
