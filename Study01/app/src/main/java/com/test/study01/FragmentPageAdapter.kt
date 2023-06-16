@@ -13,8 +13,6 @@ class FragmentPageAdapter(
         return 3
     }
 
-
-
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
@@ -28,4 +26,6 @@ class FragmentPageAdapter(
             }
         }
     }
+
+
 }

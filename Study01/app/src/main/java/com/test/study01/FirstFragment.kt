@@ -1,11 +1,13 @@
 package com.test.study01
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.test.study01.databinding.FragmentFirstBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,8 +24,6 @@ class FirstFragment : Fragment() {
 
 
     lateinit var fragmentFirstBinding: FragmentFirstBinding
-    // TODO 여기부터
-    lateinit var webView: WebView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +31,24 @@ class FirstFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         fragmentFirstBinding = FragmentFirstBinding.inflate(inflater, container, false)
+
+        fragmentFirstBinding.run {
+            webView.run {
+                settings.javaScriptEnabled = true
+                webViewClient = WebViewClient()
+                loadUrl("https://comic.naver.com/webtoon/detail?titleId=811707&no=1")
+                setOnKeyListener { view, i, keyEvent ->
+                    if(keyEvent.action == KeyEvent.ACTION_DOWN){
+                        if(i == KeyEvent.KEYCODE_BACK){
+                            if(webView.canGoBack()){
+                                webView.goBack()
+                            }
+                        }
+                    }
+                    true
+                }
+            }
+        }
 
         return fragmentFirstBinding.root
     }

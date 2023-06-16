@@ -1,10 +1,12 @@
 package com.test.study01
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import com.test.study01.databinding.FragmentSecondBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +39,23 @@ class SecondFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         fragmentSecondBinding = FragmentSecondBinding.inflate(inflater, container, false)
+        fragmentSecondBinding.run {
+            webView.run {
+                settings.javaScriptEnabled = true
+                webViewClient = WebViewClient()
+                loadUrl("https://comic.naver.com/webtoon/detail?titleId=727188&no=217")
+                setOnKeyListener { view, i, keyEvent ->
+                    if(keyEvent.action == KeyEvent.ACTION_DOWN){
+                        if(i == KeyEvent.KEYCODE_BACK){
+                            if(webView.canGoBack()){
+                                webView.goBack()
+                            }
+                        }
+                    }
+                    true
+                }
+            }
+        }
         return fragmentSecondBinding.root
     }
 
